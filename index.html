@@ -264,14 +264,17 @@
             letter-spacing: 0.5px;
         }
         
-        /* Teer wala Perfect Effect */
+        /* Teer wala Perfect Effect - Yellow Green Gradient */
         nav a::before {
             content: '→';
             position: absolute;
             left: -25px;
             top: 50%;
             transform: translateY(-50%) scale(0);
-            color: #FFD700;
+            background: linear-gradient(90deg, #FFD700, #32CD32);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             font-weight: 900;
             font-size: 1.3rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -292,7 +295,7 @@
             left: 0;
             width: 0;
             height: 3px;
-            background: linear-gradient(90deg, #FFD700, #FFED4E, #32CD32);
+            background: linear-gradient(90deg, #FFD700, #FFED4E, #32CD32, #228B22);
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 2px;
             box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
@@ -301,6 +304,7 @@
         nav a:hover {
             color: #FFD700;
             transform: translateX(8px);
+            text-shadow: 0 2px 5px rgba(255, 215, 0, 0.3);
         }
         
         nav a:hover::after {
@@ -371,11 +375,11 @@
         }
         
         @keyframes emergencySpin {
-            0% { transform: rotate(0deg); }
-            25% { background: linear-gradient(135deg, #FFD700, #FFED4E); }
-            50% { background: linear-gradient(135deg, #FFED4E, #FFD700); }
-            75% { background: linear-gradient(135deg, #FFD700, #FFED4E); }
-            100% { transform: rotate(360deg); }
+            0% { transform: rotate(0deg); background: linear-gradient(135deg, #FFD700, #32CD32); }
+            25% { background: linear-gradient(135deg, #32CD32, #FFED4E); }
+            50% { background: linear-gradient(135deg, #FFED4E, #228B22); }
+            75% { background: linear-gradient(135deg, #228B22, #FFD700); }
+            100% { transform: rotate(360deg); background: linear-gradient(135deg, #FFD700, #32CD32); }
         }
         
         .emergency-btn::before {
@@ -399,6 +403,7 @@
             transform: scale(1.1);
             box-shadow: 0 10px 25px rgba(255, 215, 0, 0.5);
             animation-play-state: paused;
+            background: linear-gradient(135deg, #FFD700, #32CD32);
         }
         
         /* Header Scroll Effect */
@@ -441,6 +446,44 @@
             background-color: #f9f9f9;
             overflow-x: hidden;
             width: 100%;
+            position: relative;
+        }
+        
+        /* Body Border Lines - Left & Right Yellow-Green */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(to bottom, #FFD700, #FFED4E, #32CD32, #228B22);
+            z-index: 9999;
+            box-shadow: 5px 0 20px rgba(255, 215, 0, 0.3);
+            animation: borderGlowLeft 4s infinite alternate;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(to bottom, #FFD700, #FFED4E, #32CD32, #228B22);
+            z-index: 9999;
+            box-shadow: -5px 0 20px rgba(50, 205, 50, 0.3);
+            animation: borderGlowRight 4s infinite alternate;
+        }
+        
+        @keyframes borderGlowLeft {
+            0% { box-shadow: 5px 0 20px rgba(255, 215, 0, 0.3); }
+            100% { box-shadow: 5px 0 30px rgba(50, 205, 50, 0.5); }
+        }
+        
+        @keyframes borderGlowRight {
+            0% { box-shadow: -5px 0 20px rgba(50, 205, 50, 0.3); }
+            100% { box-shadow: -5px 0 30px rgba(255, 215, 0, 0.5); }
         }
         
         h1, h2, h3, h4, h5 {
@@ -458,6 +501,10 @@
             position: relative;
             overflow: hidden;
             animation: heroBackgroundChange 30s infinite;
+            border-left: 3px solid transparent;
+            border-right: 3px solid transparent;
+            border-image: linear-gradient(to bottom, #FFD700, #32CD32) 1;
+            margin: 0 8px;
         }
         
         @keyframes heroBackgroundChange {
@@ -529,6 +576,30 @@
         /* Sections */
         section {
             padding: 100px 5%;
+            margin: 0 8px;
+            position: relative;
+        }
+        
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -8px;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, #FFD700, #32CD32);
+            opacity: 0.5;
+        }
+        
+        section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -8px;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, #FFD700, #32CD32);
+            opacity: 0.5;
         }
         
         .section-title {
@@ -1796,6 +1867,7 @@
             padding: 80px 5% 40px;
             position: relative;
             overflow: hidden;
+            margin: 0 8px;
         }
         
         footer::before {
@@ -2148,6 +2220,23 @@
             
             .welcome-content p {
                 font-size: 1.2rem;
+            }
+            
+            /* Remove side borders on mobile */
+            body::before,
+            body::after {
+                display: none;
+            }
+            
+            section::before,
+            section::after {
+                display: none;
+            }
+            
+            .hero,
+            section,
+            footer {
+                margin: 0;
             }
         }
         
@@ -2853,7 +2942,7 @@
     <!-- Image Modal -->
     <div class="image-modal" id="imageModal">
         <div class="modal-content">
-            <img id="modalImage" src="" alt="Full Size Image">
+            <img id="modalImage" src="" alt="">
             <div class="close-modal" id="closeModal">&times;</div>
         </div>
     </div>
